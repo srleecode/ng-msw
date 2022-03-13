@@ -1,0 +1,5 @@
+{
+  "extends": "../tsconfig.base.json",
+  "exclude": ["../libs/**/*.spec.js", "../libs/**/*.spec.ts"],
+  "include": ["../libs/**/*", "../apps/examples/src/polyfills.ts"]
+}

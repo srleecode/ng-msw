@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "projects": {
+    "examples": "apps/examples",
+    "ng-shared-components-header-application": "libs/ng-shared/components/header/application",
+    "ng-shared-components-header-data-access": "libs/ng-shared/components/header/data-access",
+    "ng-shared-components-header-domain": "libs/ng-shared/components/header/domain",
+    "ng-shared-components-header-shell": "libs/ng-shared/components/header/shell",
+    "ng-shared-ng-msw-domain": "libs/ng-shared/ng-msw/domain",
+    "ng-shared-ng-msw-util": "libs/ng-shared/ng-msw/util"
+  }
+}

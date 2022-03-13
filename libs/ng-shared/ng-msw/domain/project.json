@@ -1,0 +1,15 @@
+{
+  "projectType": "library",
+  "root": "libs/ng-shared/ng-msw/domain",
+  "sourceRoot": "libs/ng-shared/ng-msw/domain/src",
+  "prefix": "ng-shared",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/ng-shared/ng-msw/domain/src/**/*.ts", "libs/ng-shared/ng-msw/domain/src/**/*.html"]
+      }
+    }
+  },
+  "tags": ["app:ng-shared", "scope:ng-shared-ng-msw", "type:domain"]
+}

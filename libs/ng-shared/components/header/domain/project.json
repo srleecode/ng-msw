@@ -1,0 +1,22 @@
+{
+  "projectType": "library",
+  "root": "libs/ng-shared/components/header/domain",
+  "sourceRoot": "libs/ng-shared/components/header/domain/src",
+  "prefix": "ng-shared",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/ng-shared/components/header/domain/src/**/*.ts",
+          "libs/ng-shared/components/header/domain/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": [
+    "app:ng-shared",
+    "scope:ng-shared-components-header",
+    "type:domain"
+  ]
+}

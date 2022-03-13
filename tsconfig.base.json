@@ -1,0 +1,38 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@cypress/component-testing": [".component-testing/index.ts"],
+      "@srleecode/ng-shared/components/header/application": [
+        "libs/ng-shared/components/header/application/src/index.ts"
+      ],
+      "@srleecode/ng-shared/components/header/data-access": [
+        "libs/ng-shared/components/header/data-access/src/index.ts"
+      ],
+      "@srleecode/ng-shared/components/header/domain": ["libs/ng-shared/components/header/domain/src/index.ts"],
+      "@srleecode/ng-shared/components/header/domain/testing": [
+        "libs/ng-shared/components/header/domain/src/testing.ts"
+      ],
+      "@srleecode/ng-shared/components/header/shell": ["libs/ng-shared/components/header/shell/src/index.ts"],
+      "@srleecode/ng-shared/ng-msw/domain": ["libs/ng-shared/ng-msw/domain/src/index.ts"],
+      "@srleecode/ng-shared/ng-msw/domain/testing": ["libs/ng-shared/ng-msw/domain/src/testing.ts"],
+      "@srleecode/ng-shared/ng-msw/util": ["libs/ng-shared/ng-msw/util/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

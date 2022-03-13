@@ -1,0 +1,39 @@
+{
+  "projectType": "library",
+  "root": "libs/ng-shared/ng-msw/util",
+  "sourceRoot": "libs/ng-shared/ng-msw/util/src",
+  "prefix": "ng-shared",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/libs/ng-shared/ng-msw/util"],
+      "options": {
+        "project": "libs/ng-shared/ng-msw/util/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/ng-shared/ng-msw/util/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/ng-shared/ng-msw/util/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/ng-shared/ng-msw/util"],
+      "options": {
+        "jestConfig": "libs/ng-shared/ng-msw/util/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/ng-shared/ng-msw/util/src/**/*.ts", "libs/ng-shared/ng-msw/util/src/**/*.html"]
+      }
+    }
+  },
+  "tags": ["app:ng-shared", "scope:ng-shared-ng-msw", "type:util"]
+}

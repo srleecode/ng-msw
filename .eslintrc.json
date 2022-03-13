@@ -1,0 +1,153 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "**/*"
+  ],
+  "plugins": [
+    "@nrwl/nx"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts",
+        "*.tsx",
+        "*.js",
+        "*.jsx"
+      ],
+      "rules": {
+        "@nrwl/nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": [
+                  "*"
+                ]
+              },
+              {
+                "sourceTag": "type:shell",
+                "onlyDependOnLibsWithTags": [
+                  "type:application",
+                  "type:domain",
+                  "type:shell",
+                  "type:directive",
+                  "type:feature",
+                  "type:ui",
+                  "type:util"
+                ]
+              },
+              {
+                "sourceTag": "type:feature",
+                "onlyDependOnLibsWithTags": [
+                  "type:application",
+                  "type:domain",
+                  "type:feature",
+                  "type:directive",
+                  "type:ui",
+                  "type:util"
+                ]
+              },
+              {
+                "sourceTag": "type:ui",
+                "onlyDependOnLibsWithTags": [
+                  "type:feature",
+                  "type:domain",
+                  "type:directive",
+                  "type:ui",
+                  "type:util"
+                ]
+              },
+              {
+                "sourceTag": "type:directive",
+                "onlyDependOnLibsWithTags": [
+                  "type:application",
+                  "type:domain",
+                  "type:directive",
+                  "type:util"
+                ]
+              },
+              {
+                "sourceTag": "type:application",
+                "onlyDependOnLibsWithTags": [
+                  "type:application",
+                  "type:data-access",
+                  "type:domain",
+                  "type:util"
+                ]
+              },
+              {
+                "sourceTag": "type:domain",
+                "onlyDependOnLibsWithTags": [
+                  "type:domain"
+                ]
+              },
+              {
+                "sourceTag": "type:data-access",
+                "onlyDependOnLibsWithTags": [
+                  "type:data-access",
+                  "type:domain",
+                  "type:util"
+                ]
+              },
+              {
+                "sourceTag": "type:util",
+                "onlyDependOnLibsWithTags": [
+                  "type:domain",
+                  "type:util"
+                ]
+              },
+              {
+                "sourceTag": "scope:ng-shared-ng-msw",
+                "onlyDependOnLibsWithTags": [
+                  "scope:ng-shared-ng-msw",
+                  "scope:ng-shared-shared",
+                  "app:ng-shared"
+                ]
+              },
+              {
+                "sourceTag": "scope:ng-shared-components",
+                "onlyDependOnLibsWithTags": [
+                  "scope:ng-shared-components",
+                  "scope:ng-shared-shared",
+                  "app:ng-shared"
+                ]
+              },
+              {
+                "sourceTag": "scope:ng-shared-components-header",
+                "onlyDependOnLibsWithTags": [
+                  "scope:ng-shared-components-header",
+                  "scope:ng-shared-components-shared",
+                  "scope:ng-shared-shared",
+                  "app:ng-shared"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "extends": [
+        "plugin:@nrwl/nx/typescript"
+      ],
+      "rules": {}
+    },
+    {
+      "files": [
+        "*.js",
+        "*.jsx"
+      ],
+      "extends": [
+        "plugin:@nrwl/nx/javascript"
+      ],
+      "rules": {}
+    }
+  ]
+}

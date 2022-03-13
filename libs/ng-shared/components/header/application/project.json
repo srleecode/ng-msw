@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/ng-shared/components/header/application",
+  "sourceRoot": "libs/ng-shared/components/header/application/src",
+  "prefix": "ng-shared",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/ng-shared/components/header/application"],
+      "options": {
+        "jestConfig": "libs/ng-shared/components/header/application/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/ng-shared/components/header/application/src/**/*.ts",
+          "libs/ng-shared/components/header/application/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["app:ng-shared", "scope:ng-shared-components-header", "type:application"]
+}
