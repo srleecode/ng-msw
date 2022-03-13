@@ -22,8 +22,8 @@ Mock service worker is a great tool. However, while using it I have encountered 
 
 # Solution
 
-- `mswDecorator` and `initialize` is exposed and can be used to start the mock service worker with a set of mocks that will be returned. This is to be used in the storybook tests.
-- `HttpMockModule`. This exposes a module that loads a Angular interceptor. This interceptor returns the mocks as observables. Using HttpMockModule makes it easy to use the mocks in jest tests with services.
+- `mswDecorator` and `initialize`. These can be used to start the mock service worker with a set of mocks that will be returned. This is to be used in the storybook tests.
+- `HttpMockModule`. This loads a Angular interceptor that returns the mocks as observables. Using HttpMockModule makes it easy to use the mocks in jest tests with services.
 - Both approaches consume `HttpMock` objects. This allows you to use the same mocks in the storybook tests and the jest service tests. The rest mock service worker example above can be written like this with a `HttpMock` object.
 
 ```
@@ -70,7 +70,7 @@ export const MOCKS: (HttpMock | MswRequestHandler)[] = [
 ];
 ```
 
-- if in storybook addthe mocks using a parameter. This paramter can be provided in the Meta which would apply it to all stories in the file, in the preview.js file which would apply it all stories or it can be provided in each story. For example:
+- if in storybook add the mocks using a parameter. This paramter can be provided in the Meta which would apply it to all stories in the file, in the preview.js file which would apply it all stories or it can be provided in each story. For example:
 
 ```ts
 export default {
@@ -97,7 +97,7 @@ TestBed.configureTestingModule({
 
 # Using Msw directly
 
-Some use cases might not currently be covered using the above modules. To overcome this you can use normal msw requests in the mocks. Note that these will be ignored when testing in jest with the HttpMockModule, but they will work in storybook with the MswModule.
+Some use cases might not currently be covered using the currently develop functionality. To overcome this you can use normal msw requests in the mocks. Note that these will be ignored when testing in jest with the HttpMockModule, but they will work in storybook with the MswModule.
 
 ```ts
 import { HttpMock, MswRequestHandler } from '@srleecode/ng-msw';
