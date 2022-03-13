@@ -2,8 +2,6 @@ import { moduleMetadata, Story, Meta } from '@storybook/angular';
 import { ShellComponent, NgSharedComponentsHeaderShellModule } from './shell.component';
 import { GLOBAL_MOUNT_OPTIONS } from '@cypress/component-testing';
 
-import { THEME_MOCKS } from '@srleecode/ng-shared/components/header/domain/testing';
-
 export default {
   component: ShellComponent,
   title: 'NgShared/Components/Header/Shell',
