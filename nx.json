@@ -4,7 +4,6 @@
     "defaultBase": "master"
   },
   "cli": {
-    "defaultCollection": "@nrwl/angular",
     "packageManager": "npm"
   },
   "implicitDependencies": {
@@ -19,7 +18,13 @@
       "runner": "@nrwl/nx-cloud",
       "options": {
         "parallel": 3,
-        "cacheableOperations": ["build", "lint", "test", "e2e", "build-storybook"],
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e",
+          "build-storybook"
+        ],
         "accessToken": "MmVmMjg2YWItOGRhNi00ZTljLTk2ZjQtMzUyOGNjOTIzZDE5fHJlYWQtd3JpdGU=",
         "showUsageWarnings": true
       }
@@ -48,6 +53,5 @@
     "@nrwl/angular:component": {
       "style": "scss"
     }
-  },
-  "defaultProject": "examples"
+  }
 }

@@ -1,0 +1,2227 @@
+{
+    "pipes": [],
+    "interfaces": [
+        {
+            "name": "DecoratorContext",
+            "id": "interface-DecoratorContext-b4f7052935cc793ad9b9761c4560aec9373b7757580e5d15c65519cd8286a12604402116a58a6461ddd9c383788703e096ae9aaef66fce00b583737e54999119",
+            "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.decorator.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import type { DecoratorFunction, StoryContext } from '@storybook/addons';\r\nimport { HttpMock } from '../models/http-mock.model';\r\nimport { MswRequestHandler } from '../models/msw-request-handler.type';\r\nimport { addHandlers, resetHandlers } from './msw';\r\n\r\ntype DecoratorParameters = {\r\n  msw?: (HttpMock | MswRequestHandler)[];\r\n};\r\n\r\ninterface DecoratorContext extends StoryContext {\r\n  parameters: StoryContext['parameters'] & DecoratorParameters;\r\n}\r\n\r\nexport const mswDecorator: DecoratorFunction = (storyFn, context: DecoratorContext) => {\r\n  const {\r\n    parameters: { msw },\r\n  } = context;\r\n\r\n  resetHandlers();\r\n  if (msw) {\r\n    addHandlers(...msw);\r\n  }\r\n\r\n  return storyFn();\r\n};\r\n",
+            "properties": [
+                {
+                    "name": "parameters",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": [],
+            "extends": "StoryContext"
+        },
+        {
+            "name": "HeaderState",
+            "id": "interface-HeaderState-e9f0184cbe3b685e037ca19c4253bdc4881a075cca41366e867e3c277488d44e5018a0407a5687b112a2f11c14cf242f5da68417093066dc72c47142d8785d52",
+            "file": "libs/ng-shared/components/header/domain/src/lib/header-state.model.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface HeaderState {\r\n  lightTheme: boolean;\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "lightTheme",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
+            "name": "HttpMock",
+            "id": "interface-HttpMock-932f35dd4e135c79a16f32473e338af1a5b70fa143b5164cfff973911bd409ef1947752b468eb760edc250fa9f1245836150c497d1045b232dc4ebb40ed4a79d",
+            "file": "libs/ng-shared/ng-msw/util/src/lib/models/http-mock.model.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { DefaultRequestBody, PathParams, RestRequest } from 'msw';\r\nimport { MethodType } from './method-type.model';\r\n\r\nexport interface HttpMock<T = unknown, R = DefaultRequestBody> {\r\n  url: string;\r\n  method?: MethodType;\r\n  status?: number;\r\n  delay?: number;\r\n  once?: boolean;\r\n  response?: T;\r\n  responseFn?: (req: RestRequest<R, PathParams>) => T;\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "delay",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": true,
+                    "description": "",
+                    "line": 8
+                },
+                {
+                    "name": "method",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MethodType",
+                    "optional": true,
+                    "description": "",
+                    "line": 6
+                },
+                {
+                    "name": "once",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": true,
+                    "description": "",
+                    "line": 9
+                },
+                {
+                    "name": "response",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "T",
+                    "optional": true,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "responseFn",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "function",
+                    "optional": true,
+                    "description": "",
+                    "line": 11
+                },
+                {
+                    "name": "status",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": true,
+                    "description": "",
+                    "line": 7
+                },
+                {
+                    "name": "url",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
+            "name": "MockResponse",
+            "id": "interface-MockResponse-e025e2b9852e9718f58f7d846adf060d1cc7bf2ded146e56d42da679ba83da95b0697b0569807f2ed7e165976ba1cb6e52a31e70d43a3528d420e74506dbfae0",
+            "file": "libs/ng-shared/ng-msw/domain/src/lib/mocks/mock.mock.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { rest } from 'msw';\r\nimport { HttpMock, MswRequestHandler } from '@srleecode/ng-msw';\r\n\r\nexport interface MockResponse {\r\n  data: string;\r\n}\r\n\r\nexport const MOCKS: (HttpMock | MswRequestHandler)[] = [\r\n  {\r\n    url: 'endpoint-one',\r\n    response: {\r\n      data: 'endpoint-one',\r\n    },\r\n  },\r\n  rest.get('endpoint-two', (req, res, ctx) =>\r\n    res(\r\n      ctx.json({\r\n        data: 'endpoint-two',\r\n      })\r\n    )\r\n  ),\r\n  {\r\n    url: 'endpoint-three',\r\n    method: 'POST',\r\n    response: {\r\n      data: 'endpoint-three',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-four',\r\n    method: 'POST',\r\n    response: {\r\n      data: 'endpoint-four',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-four',\r\n    method: 'PUT',\r\n    response: {\r\n      data: 'endpoint-four',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-five',\r\n    status: 500,\r\n    response: {\r\n      data: 'endpoint-five',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-six',\r\n    once: true,\r\n    response: {\r\n      data: 'response 1',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-six',\r\n    response: {\r\n      data: 'response 2',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-seven',\r\n    delay: 500,\r\n    response: {\r\n      data: 'endpoint-seven',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-eight/:userId',\r\n    responseFn: (req) => ({\r\n      data: 'endpoint-eight-' + req.params.userId,\r\n    }),\r\n  },\r\n  {\r\n    url: 'endpoint-nine',\r\n    response: {\r\n      data: 'endpoint-nine',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-ten?start=0&limit=10',\r\n    response: {\r\n      data: 'endpoint-ten',\r\n    },\r\n  },\r\n];\r\n",
+            "properties": [
+                {
+                    "name": "data",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
+            "name": "ThemeResponse",
+            "id": "interface-ThemeResponse-fa1210a503c26d589e6d674be808e525771124a89415d1f92a5f2ad483fd972968568032883e5e5d5045a65dec85916ed8c6b6d85de1cf43739a094a22c06c67",
+            "file": "libs/ng-shared/components/header/domain/src/lib/theme-response.model.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface ThemeResponse {\r\n  lightTheme: boolean;\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "lightTheme",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        }
+    ],
+    "injectables": [
+        {
+            "name": "HeaderStoreService",
+            "id": "injectable-HeaderStoreService-aafd990d6bc95b2d8771c9d981cce969c2832c7b2104fbada63eff65933996d6a59655d245265bd7c653518b35a6f05af771d8e5f160c30287adc87a9af756e8",
+            "file": "libs/ng-shared/components/header/application/src/lib/header-store.service.ts",
+            "properties": [
+                {
+                    "name": "lightTheme$",
+                    "defaultValue": "this.select(({ lightTheme }) => lightTheme)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 13,
+                    "modifierKind": [
+                        144
+                    ]
+                },
+                {
+                    "name": "loadTheme",
+                    "defaultValue": "this.effect(($) =>\r\n    $.pipe(\r\n      switchMap(() =>\r\n        this.themeService.load$().pipe(\r\n          tapResponse(\r\n            (rsp) => this.setLightTheme(rsp.lightTheme),\r\n            (error: Error) => {\r\n              console.error(error.message);\r\n              return EMPTY;\r\n            }\r\n          )\r\n        )\r\n      )\r\n    )\r\n  )",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 31,
+                    "modifierKind": [
+                        144
+                    ]
+                },
+                {
+                    "name": "setLightTheme",
+                    "defaultValue": "this.updater((state, lightTheme: boolean) => ({\r\n    ...state,\r\n    lightTheme,\r\n  }))",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 15,
+                    "modifierKind": [
+                        121,
+                        144
+                    ]
+                },
+                {
+                    "name": "toggleTheme",
+                    "defaultValue": "this.effect(($) =>\r\n    $.pipe(\r\n      withLatestFrom(this.lightTheme$),\r\n      map(([, lightTheme]) => lightTheme),\r\n      tap((lightTheme) => {\r\n        this.setLightTheme(!lightTheme);\r\n      }),\r\n      switchMap((lightTheme) => this.themeService.save$(!lightTheme).pipe(catchError(() => EMPTY)))\r\n    )\r\n  )",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 20,
+                    "modifierKind": [
+                        144
+                    ]
+                }
+            ],
+            "methods": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { HeaderState, INITIAL_STATE } from '@srleecode/ng-shared/components/header/domain';\r\nimport { Injectable } from '@angular/core';\r\nimport { ComponentStore, tapResponse } from '@ngrx/component-store';\r\nimport { catchError, EMPTY, map, switchMap, tap, withLatestFrom } from 'rxjs';\r\nimport { ThemeService } from '@srleecode/ng-shared/components/header/data-access';\r\n\r\n@Injectable()\r\nexport class HeaderStoreService extends ComponentStore<HeaderState> {\r\n  constructor(private themeService: ThemeService) {\r\n    super(INITIAL_STATE);\r\n  }\r\n\r\n  readonly lightTheme$ = this.select(({ lightTheme }) => lightTheme);\r\n\r\n  private readonly setLightTheme = this.updater((state, lightTheme: boolean) => ({\r\n    ...state,\r\n    lightTheme,\r\n  }));\r\n\r\n  readonly toggleTheme = this.effect(($) =>\r\n    $.pipe(\r\n      withLatestFrom(this.lightTheme$),\r\n      map(([, lightTheme]) => lightTheme),\r\n      tap((lightTheme) => {\r\n        this.setLightTheme(!lightTheme);\r\n      }),\r\n      switchMap((lightTheme) => this.themeService.save$(!lightTheme).pipe(catchError(() => EMPTY)))\r\n    )\r\n  );\r\n\r\n  readonly loadTheme = this.effect(($) =>\r\n    $.pipe(\r\n      switchMap(() =>\r\n        this.themeService.load$().pipe(\r\n          tapResponse(\r\n            (rsp) => this.setLightTheme(rsp.lightTheme),\r\n            (error: Error) => {\r\n              console.error(error.message);\r\n              return EMPTY;\r\n            }\r\n          )\r\n        )\r\n      )\r\n    )\r\n  );\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "themeService",
+                        "type": "ThemeService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 8,
+                "jsdoctags": [
+                    {
+                        "name": "themeService",
+                        "type": "ThemeService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": "ComponentStore",
+            "type": "injectable"
+        },
+        {
+            "name": "ThemeService",
+            "id": "injectable-ThemeService-a122b4cc3ee5b0b612ed1178eef7bcb10c8c35fde37fcd8ceece509d50bc6852cfe2dd8b79c8f55d22edcf9a4b0d43a7c8d1cfe1aabc8fbeae322f2d89bf742f",
+            "file": "libs/ng-shared/components/header/data-access/src/lib/theme.service.ts",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "load$",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "Observable<ThemeResponse>",
+                    "typeParameters": [],
+                    "line": 18,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "save$",
+                    "args": [
+                        {
+                            "name": "isLightTheme",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 12,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "isLightTheme",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { HttpClient } from '@angular/common/http';\r\nimport { Observable } from 'rxjs';\r\nimport { ThemeResponse } from '@srleecode/ng-shared/components/header/domain';\r\n\r\n@Injectable({\r\n  providedIn: 'root',\r\n})\r\nexport class ThemeService {\r\n  constructor(private httpClient: HttpClient) {}\r\n\r\n  save$(isLightTheme: boolean) {\r\n    return this.httpClient.post('user/theme', {\r\n      isLightTheme,\r\n    });\r\n  }\r\n\r\n  load$(): Observable<ThemeResponse> {\r\n    return this.httpClient.get<ThemeResponse>('user/theme');\r\n  }\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "httpClient",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 9,
+                "jsdoctags": [
+                    {
+                        "name": "httpClient",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "type": "injectable"
+        }
+    ],
+    "guards": [],
+    "interceptors": [
+        {
+            "name": "HttpMockRequestInterceptor",
+            "id": "injectable-HttpMockRequestInterceptor-98ac2b4dfe70b159014c73454ef8762ef47aa2b60303b2d998698383eb59bb6bebef4046ffdbdf06db5e65f8fa701eecf1617c234a63c33c18c8661ea5730a71",
+            "file": "libs/ng-shared/ng-msw/util/src/lib/http-mock/http-mock-request.interceptor.ts",
+            "properties": [
+                {
+                    "name": "doneMocks",
+                    "defaultValue": "new Set<number>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 21,
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "escapeRegExp",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 25
+                }
+            ],
+            "methods": [
+                {
+                    "name": "getMockedResponse",
+                    "args": [
+                        {
+                            "name": "request",
+                            "type": "HttpRequest<>",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "httpMock",
+                            "type": "HttpMock",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "httpMockIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<HttpResponse<>>",
+                    "typeParameters": [],
+                    "line": 47,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "request",
+                            "type": "HttpRequest<>",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "httpMock",
+                            "type": "HttpMock",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "httpMockIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getMswHeaders",
+                    "args": [
+                        {
+                            "name": "request",
+                            "type": "HttpRequest<>",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Headers",
+                    "typeParameters": [],
+                    "line": 77,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "request",
+                            "type": "HttpRequest<>",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getMswParams",
+                    "args": [
+                        {
+                            "name": "request",
+                            "type": "HttpRequest<>",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "PathParams",
+                    "typeParameters": [],
+                    "line": 83,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "request",
+                            "type": "HttpRequest<>",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getMswRequest",
+                    "args": [
+                        {
+                            "name": "request",
+                            "type": "HttpRequest<>",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "httpMockIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "RestRequest<DefaultRequestBody, PathParams>",
+                    "typeParameters": [],
+                    "line": 89,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "request",
+                            "type": "HttpRequest<>",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "httpMockIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "intercept",
+                    "args": [
+                        {
+                            "name": "request",
+                            "type": "HttpRequest<>",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "next",
+                            "type": "HttpHandler",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<HttpEvent<>>",
+                    "typeParameters": [],
+                    "line": 29,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "request",
+                            "type": "HttpRequest<>",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "next",
+                            "type": "HttpHandler",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "isHttpMock",
+                    "args": [
+                        {
+                            "name": "handler",
+                            "type": "HttpMock | MswRequestHandler",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "HttpMock",
+                    "typeParameters": [],
+                    "line": 39,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "handler",
+                            "type": "HttpMock | MswRequestHandler",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "isMatchingMethodType",
+                    "args": [
+                        {
+                            "name": "request",
+                            "type": "HttpRequest<>",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "httpMock",
+                            "type": "HttpMock",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 43,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "request",
+                            "type": "HttpRequest<>",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "httpMock",
+                            "type": "HttpMock",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { forwardRef, Inject, Injectable, Optional } from '@angular/core';\r\nimport {\r\n  HttpInterceptor,\r\n  HttpRequest,\r\n  HttpHandler,\r\n  HttpEvent,\r\n  HttpResponse,\r\n  HttpErrorResponse,\r\n} from '@angular/common/http';\r\nimport { interval, Observable, of } from 'rxjs';\r\nimport { delayWhen, map } from 'rxjs/operators';\r\nimport { HTTP_MOCK_CONFIG } from './http-mock.module';\r\nimport { DefaultRequestBody, PathParams, RestRequest } from 'msw';\r\nimport { Headers } from 'headers-polyfill';\r\nimport { HttpMock } from '../models/http-mock.model';\r\nimport { MethodType } from '../models/method-type.model';\r\nimport { MswRequestHandler } from '../models/msw-request-handler.type';\r\n\r\n@Injectable()\r\nexport class HttpMockRequestInterceptor implements HttpInterceptor {\r\n  private doneMocks = new Set<number>();\r\n  constructor(@Optional() @Inject(forwardRef(() => HTTP_MOCK_CONFIG)) private config: HttpMock[]) {}\r\n\r\n  // escapes all special characters, e.g. a url might have ? for query parameters\r\n  escapeRegExp = (string: string): string => {\r\n    return string.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\r\n  };\r\n\r\n  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {\r\n    for (const [i, httpMock] of (this.config || []).filter((mock) => this.isHttpMock(mock)).entries()) {\r\n      const regExp = new RegExp(this.escapeRegExp(httpMock.url), 'i');\r\n      if (this.isMatchingMethodType(request, httpMock) && regExp.exec(request.url) && !this.doneMocks.has(i)) {\r\n        return this.getMockedResponse(request, httpMock, i);\r\n      }\r\n    }\r\n    return next.handle(request);\r\n  }\r\n\r\n  private isHttpMock(handler: HttpMock | MswRequestHandler): handler is HttpMock {\r\n    return !!(handler as HttpMock)?.url;\r\n  }\r\n\r\n  private isMatchingMethodType(request: HttpRequest<unknown>, httpMock: HttpMock): boolean {\r\n    return !httpMock.method || (request.method as MethodType) === httpMock.method;\r\n  }\r\n\r\n  private getMockedResponse(\r\n    request: HttpRequest<unknown>,\r\n    httpMock: HttpMock,\r\n    httpMockIndex: number\r\n  ): Observable<HttpResponse<unknown>> {\r\n    const status = httpMock.status ?? 200;\r\n    const delay = httpMock.delay ?? 0;\r\n    const response = httpMock.response ?? httpMock.responseFn(this.getMswRequest(request, httpMockIndex));\r\n    const isError = status.toString().startsWith('4') || status.toString().startsWith('5');\r\n    if (httpMock.once) {\r\n      this.doneMocks.add(httpMockIndex);\r\n    }\r\n\r\n    return of({}).pipe(\r\n      delayWhen(() => (delay ? interval(delay) : of(undefined))),\r\n      map(() => {\r\n        if (isError) {\r\n          throw new HttpErrorResponse({\r\n            status,\r\n            error: new Error(JSON.stringify(response)),\r\n          });\r\n        }\r\n        return new HttpResponse({\r\n          status,\r\n          body: response,\r\n        });\r\n      })\r\n    );\r\n  }\r\n\r\n  private getMswHeaders(request: HttpRequest<unknown>): Headers {\r\n    const headers: Record<string, string[]> = {};\r\n    request.headers.keys().forEach((key) => (headers[key] = request.headers.getAll(key)));\r\n    return new Headers(headers);\r\n  }\r\n\r\n  private getMswParams(request: HttpRequest<unknown>): PathParams {\r\n    const params: Record<string, string | ReadonlyArray<string>> = {};\r\n    request.params.keys().forEach((key) => (params[key] = request.params.getAll(key)));\r\n    return params;\r\n  }\r\n\r\n  private getMswRequest(\r\n    request: HttpRequest<unknown>,\r\n    httpMockIndex: number\r\n  ): RestRequest<DefaultRequestBody, PathParams> {\r\n    return {\r\n      id: httpMockIndex.toString(),\r\n      url: undefined,\r\n      method: request.method,\r\n      headers: this.getMswHeaders(request),\r\n      cookies: undefined,\r\n      mode: undefined,\r\n      keepalive: undefined,\r\n      cache: undefined,\r\n      destination: undefined,\r\n      integrity: undefined,\r\n      credentials: undefined,\r\n      redirect: undefined,\r\n      referrer: undefined,\r\n      referrerPolicy: undefined,\r\n      body: request.body,\r\n      bodyUsed: !!request.body,\r\n      params: this.getMswParams(request),\r\n    };\r\n  }\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "config",
+                        "type": "HttpMock[]",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 21,
+                "jsdoctags": [
+                    {
+                        "name": "config",
+                        "type": "HttpMock[]",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "type": "interceptor"
+        }
+    ],
+    "classes": [],
+    "directives": [],
+    "components": [
+        {
+            "name": "ShellComponent",
+            "id": "component-ShellComponent-829ee4496d9d41573ee6bfd327838e2ba7e407283e7456475edd2847d3f3ef5346a1c6f1bc000ce3ee9783d2b2f157521d4cdafed5e0d945ada378faa42f9d77",
+            "file": "libs/ng-shared/components/header/shell/src/lib/shell.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [
+                {
+                    "name": "HeaderStoreService"
+                }
+            ],
+            "selector": "ng-shared-components-header-shell",
+            "styleUrls": [
+                "./shell.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./shell.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "isLightTheme",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "toggleTheme",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 26,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Inject, Renderer2 } from '@angular/core';\r\nimport { NgModule } from '@angular/core';\r\nimport { CommonModule, DOCUMENT } from '@angular/common';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatSlideToggleModule } from '@angular/material/slide-toggle';\r\nimport { HeaderStoreService } from '@srleecode/ng-shared/components/header/application';\r\n\r\n@Component({\r\n  selector: 'ng-shared-components-header-shell',\r\n  templateUrl: './shell.component.html',\r\n  styleUrls: ['./shell.component.scss'],\r\n  providers: [HeaderStoreService],\r\n})\r\nexport class ShellComponent {\r\n  isLightTheme = true;\r\n  constructor(\r\n    @Inject(DOCUMENT) private document: Document,\r\n    private renderer: Renderer2,\r\n    private storeService: HeaderStoreService\r\n  ) {\r\n    this.storeService.loadTheme();\r\n  }\r\n\r\n  toggleTheme(): void {\r\n    this.isLightTheme = !this.isLightTheme;\r\n    if (!this.isLightTheme) {\r\n      this.renderer.addClass(this.document.body, 'dark-theme');\r\n    } else {\r\n      this.renderer.removeClass(this.document.body, 'dark-theme');\r\n    }\r\n  }\r\n}\r\n\r\n@NgModule({\r\n  declarations: [ShellComponent],\r\n  imports: [CommonModule, MatToolbarModule, MatIconModule, MatButtonModule, MatSlideToggleModule],\r\n  exports: [ShellComponent],\r\n})\r\nexport class NgSharedComponentsHeaderShellModule {}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "mat-toolbar-row {\r\n  justify-content: space-between;\r\n}\r\n\r\nmat-slide-toggle {\r\n  font-size: 0.875rem;\r\n  margin-left: 20px;\r\n}\r\n",
+                    "styleUrl": "./shell.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "document",
+                        "type": "Document",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "renderer",
+                        "type": "Renderer2",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "storeService",
+                        "type": "HeaderStoreService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 17,
+                "jsdoctags": [
+                    {
+                        "name": "document",
+                        "type": "Document",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "renderer",
+                        "type": "Renderer2",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "storeService",
+                        "type": "HeaderStoreService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "templateData": "<mat-toolbar color=\"primary\">\r\n  <mat-toolbar-row>\r\n    <span>Examples</span>\r\n    <mat-slide-toggle [checked]=\"!isLightTheme\" labelPosition=\"before\" (change)=\"toggleTheme()\"\r\n      >Dark theme</mat-slide-toggle\r\n    >\r\n  </mat-toolbar-row>\r\n</mat-toolbar>\r\n"
+        },
+        {
+            "name": "TestComponent",
+            "id": "component-TestComponent-cd698b321defe8b6a91f85345f2c5717d3efe6ee2c44e50d9f30f80d42db21a21e66001af69ac7b6e73c5b20116793d59c9b78a8da32c569a1248d57448383d6",
+            "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "test",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./test.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "list",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "endPointEight",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 63,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "endPointFive",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 36,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "endPointFour",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 29,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "endPointNine",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 67,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "endPointOne",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 17,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "endPointSeven",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 59,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "endPointSix",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 49,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "endPointTen",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 71,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "endPointThree",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 25,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "endPointTwo",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 21,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { HttpClient, HttpClientModule, HttpHeaders, HttpParams } from '@angular/common/http';\r\nimport { Component, NgModule } from '@angular/core';\r\n// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries\r\nimport { MockResponse } from '@srleecode/ng-shared/ng-msw/domain/testing';\r\nimport { forkJoin, catchError, EMPTY, tap, mergeMap } from 'rxjs';\r\n\r\n@Component({\r\n  selector: 'test',\r\n  templateUrl: './test.component.html',\r\n})\r\nexport class TestComponent {\r\n  list: string[] = [];\r\n\r\n  constructor(private httpClient: HttpClient) {}\r\n\r\n  endPointOne(): void {\r\n    this.httpClient.get<MockResponse>('endpoint-one').subscribe((rsp) => this.list.push(rsp.data));\r\n  }\r\n\r\n  endPointTwo(): void {\r\n    this.httpClient.get<MockResponse>('endpoint-two').subscribe((rsp) => this.list.push(rsp.data));\r\n  }\r\n\r\n  endPointThree(): void {\r\n    this.httpClient.post<MockResponse>('endpoint-three', {}).subscribe((rsp) => this.list.push(rsp.data));\r\n  }\r\n\r\n  endPointFour(): void {\r\n    forkJoin([\r\n      this.httpClient.post<MockResponse>('endpoint-four', {}),\r\n      this.httpClient.put<MockResponse>('endpoint-four', {}),\r\n    ]).subscribe((rsp) => (this.list = this.list.concat(rsp.map((r) => r.data))));\r\n  }\r\n\r\n  endPointFive(): void {\r\n    this.httpClient\r\n      .get<MockResponse>('endpoint-five')\r\n      .pipe(\r\n        catchError(() => {\r\n          this.list.push('caught error');\r\n          return EMPTY;\r\n        })\r\n      )\r\n      // eslint-disable-next-line @typescript-eslint/no-empty-function\r\n      .subscribe(() => {});\r\n  }\r\n\r\n  endPointSix(): void {\r\n    this.httpClient\r\n      .get<MockResponse>('endpoint-six')\r\n      .pipe(\r\n        tap((rsp) => this.list.push(rsp.data)),\r\n        mergeMap(() => this.httpClient.get<MockResponse>('endpoint-six'))\r\n      )\r\n      .subscribe((rsp) => this.list.push(rsp.data));\r\n  }\r\n\r\n  endPointSeven(): void {\r\n    this.httpClient.get<MockResponse>('endpoint-seven').subscribe((rsp) => this.list.push(rsp.data));\r\n  }\r\n\r\n  endPointEight(): void {\r\n    this.httpClient.get<MockResponse>('endpoint-eight/test').subscribe((rsp) => this.list.push(rsp.data));\r\n  }\r\n\r\n  endPointNine() {\r\n    return this.httpClient.post<MockResponse>('endpoint-nine', {}).subscribe((rsp) => this.list.push(rsp.data));\r\n  }\r\n\r\n  endPointTen() {\r\n    const params = new HttpParams({\r\n      fromObject: {\r\n        start: 0,\r\n        limit: 10,\r\n      },\r\n    });\r\n    return this.httpClient\r\n      .post<MockResponse>('endpoint-ten?start=0&limit=10', {}, { params })\r\n      .subscribe((rsp) => this.list.push(rsp.data));\r\n  }\r\n}\r\n\r\n@NgModule({\r\n  declarations: [TestComponent],\r\n  imports: [CommonModule, HttpClientModule],\r\n  exports: [TestComponent],\r\n})\r\nexport class TestModule {}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "httpClient",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 13,
+                "jsdoctags": [
+                    {
+                        "name": "httpClient",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "templateData": "<ul>\r\n  <li *ngFor=\"let item of list\">{{ item }}</li>\r\n</ul>\r\n<button aria-label=\"Endpoint one button\" (click)=\"endPointOne()\">Endpoint one</button>\r\n<button aria-label=\"Endpoint two button\" (click)=\"endPointTwo()\">Endpoint two</button>\r\n<button aria-label=\"Endpoint three button\" (click)=\"endPointThree()\">Endpoint three</button>\r\n<button aria-label=\"Endpoint four button\" (click)=\"endPointFour()\">Endpoint four</button>\r\n<button aria-label=\"Endpoint five button\" (click)=\"endPointFive()\">Endpoint five</button>\r\n<button aria-label=\"Endpoint six button\" (click)=\"endPointSix()\">Endpoint six</button>\r\n<button aria-label=\"Endpoint seven button\" (click)=\"endPointSeven()\">Endpoint seven</button>\r\n<button aria-label=\"Endpoint eight button\" (click)=\"endPointEight()\">Endpoint eight</button>\r\n<button aria-label=\"Endpoint nine button\" (click)=\"endPointNine()\">Endpoint nine</button>\r\n<button aria-label=\"Endpoint ten button\" (click)=\"endPointTen()\">Endpoint ten</button>\r\n"
+        }
+    ],
+    "modules": [
+        {
+            "name": "HttpMockModule",
+            "id": "module-HttpMockModule-5f73c6059bb1dca1e8a5dcb50a875fd189441c00a748e2eafcbd08aafc711a5a5b0a415700c0cf43c0eb0793260fcfc437be692841391f6e44800a41cf2a0b23",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "libs/ng-shared/ng-msw/util/src/lib/http-mock/http-mock.module.ts",
+            "methods": [
+                {
+                    "name": "forRoot",
+                    "args": [
+                        {
+                            "name": "config",
+                            "type": "HttpMock[]",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "ModuleWithProviders<HttpMockModule>",
+                    "typeParameters": [],
+                    "line": 15,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        124
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "config",
+                            "type": "HttpMock[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "sourceCode": "import { HTTP_INTERCEPTORS } from '@angular/common/http';\r\nimport { InjectionToken, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';\r\nimport { HttpMock } from '../models/http-mock.model';\r\nimport { HttpMockRequestInterceptor } from './http-mock-request.interceptor';\r\n\r\nexport const HTTP_MOCK_CONFIG = new InjectionToken<HttpMock[]>('HTTP_MOCK_CONFIG');\r\n\r\n@NgModule({})\r\nexport class HttpMockModule {\r\n  constructor(@Optional() @SkipSelf() module?: HttpMockModule) {\r\n    if (module) {\r\n      throw new Error('HttpMockModule is already loaded. It should only be imported once');\r\n    }\r\n  }\r\n  static forRoot(config: HttpMock[]): ModuleWithProviders<HttpMockModule> {\r\n    return {\r\n      ngModule: HttpMockModule,\r\n      providers: [\r\n        {\r\n          provide: HTTP_MOCK_CONFIG,\r\n          useValue: config,\r\n        },\r\n        {\r\n          provide: HTTP_INTERCEPTORS,\r\n          useClass: HttpMockRequestInterceptor,\r\n          multi: true,\r\n        },\r\n      ],\r\n    };\r\n  }\r\n}\r\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "NgSharedComponentsHeaderShellModule",
+            "id": "module-NgSharedComponentsHeaderShellModule-829ee4496d9d41573ee6bfd327838e2ba7e407283e7456475edd2847d3f3ef5346a1c6f1bc000ce3ee9783d2b2f157521d4cdafed5e0d945ada378faa42f9d77",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "libs/ng-shared/components/header/shell/src/lib/shell.component.ts",
+            "methods": [],
+            "sourceCode": "import { Component, Inject, Renderer2 } from '@angular/core';\r\nimport { NgModule } from '@angular/core';\r\nimport { CommonModule, DOCUMENT } from '@angular/common';\r\nimport { MatToolbarModule } from '@angular/material/toolbar';\r\nimport { MatIconModule } from '@angular/material/icon';\r\nimport { MatButtonModule } from '@angular/material/button';\r\nimport { MatSlideToggleModule } from '@angular/material/slide-toggle';\r\nimport { HeaderStoreService } from '@srleecode/ng-shared/components/header/application';\r\n\r\n@Component({\r\n  selector: 'ng-shared-components-header-shell',\r\n  templateUrl: './shell.component.html',\r\n  styleUrls: ['./shell.component.scss'],\r\n  providers: [HeaderStoreService],\r\n})\r\nexport class ShellComponent {\r\n  isLightTheme = true;\r\n  constructor(\r\n    @Inject(DOCUMENT) private document: Document,\r\n    private renderer: Renderer2,\r\n    private storeService: HeaderStoreService\r\n  ) {\r\n    this.storeService.loadTheme();\r\n  }\r\n\r\n  toggleTheme(): void {\r\n    this.isLightTheme = !this.isLightTheme;\r\n    if (!this.isLightTheme) {\r\n      this.renderer.addClass(this.document.body, 'dark-theme');\r\n    } else {\r\n      this.renderer.removeClass(this.document.body, 'dark-theme');\r\n    }\r\n  }\r\n}\r\n\r\n@NgModule({\r\n  declarations: [ShellComponent],\r\n  imports: [CommonModule, MatToolbarModule, MatIconModule, MatButtonModule, MatSlideToggleModule],\r\n  exports: [ShellComponent],\r\n})\r\nexport class NgSharedComponentsHeaderShellModule {}\r\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "ShellComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "ShellComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "TestModule",
+            "id": "module-TestModule-cd698b321defe8b6a91f85345f2c5717d3efe6ee2c44e50d9f30f80d42db21a21e66001af69ac7b6e73c5b20116793d59c9b78a8da32c569a1248d57448383d6",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.component.ts",
+            "methods": [],
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { HttpClient, HttpClientModule, HttpHeaders, HttpParams } from '@angular/common/http';\r\nimport { Component, NgModule } from '@angular/core';\r\n// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries\r\nimport { MockResponse } from '@srleecode/ng-shared/ng-msw/domain/testing';\r\nimport { forkJoin, catchError, EMPTY, tap, mergeMap } from 'rxjs';\r\n\r\n@Component({\r\n  selector: 'test',\r\n  templateUrl: './test.component.html',\r\n})\r\nexport class TestComponent {\r\n  list: string[] = [];\r\n\r\n  constructor(private httpClient: HttpClient) {}\r\n\r\n  endPointOne(): void {\r\n    this.httpClient.get<MockResponse>('endpoint-one').subscribe((rsp) => this.list.push(rsp.data));\r\n  }\r\n\r\n  endPointTwo(): void {\r\n    this.httpClient.get<MockResponse>('endpoint-two').subscribe((rsp) => this.list.push(rsp.data));\r\n  }\r\n\r\n  endPointThree(): void {\r\n    this.httpClient.post<MockResponse>('endpoint-three', {}).subscribe((rsp) => this.list.push(rsp.data));\r\n  }\r\n\r\n  endPointFour(): void {\r\n    forkJoin([\r\n      this.httpClient.post<MockResponse>('endpoint-four', {}),\r\n      this.httpClient.put<MockResponse>('endpoint-four', {}),\r\n    ]).subscribe((rsp) => (this.list = this.list.concat(rsp.map((r) => r.data))));\r\n  }\r\n\r\n  endPointFive(): void {\r\n    this.httpClient\r\n      .get<MockResponse>('endpoint-five')\r\n      .pipe(\r\n        catchError(() => {\r\n          this.list.push('caught error');\r\n          return EMPTY;\r\n        })\r\n      )\r\n      // eslint-disable-next-line @typescript-eslint/no-empty-function\r\n      .subscribe(() => {});\r\n  }\r\n\r\n  endPointSix(): void {\r\n    this.httpClient\r\n      .get<MockResponse>('endpoint-six')\r\n      .pipe(\r\n        tap((rsp) => this.list.push(rsp.data)),\r\n        mergeMap(() => this.httpClient.get<MockResponse>('endpoint-six'))\r\n      )\r\n      .subscribe((rsp) => this.list.push(rsp.data));\r\n  }\r\n\r\n  endPointSeven(): void {\r\n    this.httpClient.get<MockResponse>('endpoint-seven').subscribe((rsp) => this.list.push(rsp.data));\r\n  }\r\n\r\n  endPointEight(): void {\r\n    this.httpClient.get<MockResponse>('endpoint-eight/test').subscribe((rsp) => this.list.push(rsp.data));\r\n  }\r\n\r\n  endPointNine() {\r\n    return this.httpClient.post<MockResponse>('endpoint-nine', {}).subscribe((rsp) => this.list.push(rsp.data));\r\n  }\r\n\r\n  endPointTen() {\r\n    const params = new HttpParams({\r\n      fromObject: {\r\n        start: 0,\r\n        limit: 10,\r\n      },\r\n    });\r\n    return this.httpClient\r\n      .post<MockResponse>('endpoint-ten?start=0&limit=10', {}, { params })\r\n      .subscribe((rsp) => this.list.push(rsp.data));\r\n  }\r\n}\r\n\r\n@NgModule({\r\n  declarations: [TestComponent],\r\n  imports: [CommonModule, HttpClientModule],\r\n  exports: [TestComponent],\r\n})\r\nexport class TestModule {}\r\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "TestComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "TestComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        }
+    ],
+    "miscellaneous": {
+        "variables": [
+            {
+                "name": "addHandlers",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "(...handlers: (HttpMock | MswRequestHandler)[]): void => {\r\n  const worker = getWorker();\r\n  const processedHandlers: MswRequestHandler[] = [];\r\n  handlers.forEach((handler) => {\r\n    if (isHttpMock(handler)) {\r\n      processedHandlers.push(getRestHandlers(handler.url, handler));\r\n    } else {\r\n      processedHandlers.push(handler);\r\n    }\r\n  });\r\n  worker.use(...processedHandlers);\r\n}"
+            },
+            {
+                "name": "addHttpMockSettings",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "(httpMock: HttpMock): ResponseTransformer<unknown, unknown> =>\r\n  (res) => {\r\n    const { status, delay, once } = httpMock;\r\n    res.status = status ?? 200;\r\n    if (delay) {\r\n      res.delay = delay;\r\n    }\r\n    if (once) {\r\n      res.once = once;\r\n    }\r\n    return res;\r\n  }"
+            },
+            {
+                "name": "api",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "SetupWorkerApi"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/components/header/shell/src/lib/shell.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Delay",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  ...Default,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    userEvent.click(canvas.getByLabelText(/Endpoint seven button/i));\r\n    expect(await canvas.queryByText('endpoint-seven')).toBeNull();\r\n    await canvas.findByText('endpoint-seven', undefined, { timeout: 1000 });\r\n  },\r\n}"
+            },
+            {
+                "name": "getRestHandlers",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "(mocksUrl: string, mock: HttpMock): MswRequestHandler => {\r\n  const url = getSlashPrefixedUrl(mocksUrl);\r\n  const responseResolver: ResponseResolver<RestRequest<never, PathParams>, RestContext, DefaultRequestBody> = (\r\n    req,\r\n    res,\r\n    ctx\r\n  ) => {\r\n    const response = mock.response ?? mock.responseFn(req);\r\n    return res(addHttpMockSettings(mock), ctx.json(response));\r\n  };\r\n  switch (mock.method) {\r\n    case 'GET':\r\n      return rest.get(url, responseResolver);\r\n    case 'POST':\r\n      return rest.post(url, responseResolver);\r\n    case 'PUT':\r\n      return rest.put(url, responseResolver);\r\n    case 'DELETE':\r\n      return rest.delete(url, responseResolver);\r\n    default:\r\n      return rest.all(url, responseResolver);\r\n  }\r\n}"
+            },
+            {
+                "name": "getSlashPrefixedUrl",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "(url: string) => (url.startsWith('/') ? url : `/${url}`)"
+            },
+            {
+                "name": "getWorker",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "(): SetupWorkerApi => api"
+            },
+            {
+                "name": "HTTP_MOCK_CONFIG",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/http-mock/http-mock.module.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "new InjectionToken<HttpMock[]>('HTTP_MOCK_CONFIG')"
+            },
+            {
+                "name": "INITIAL_STATE",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/components/header/domain/src/lib/initial-state.const.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "HeaderState",
+                "defaultValue": "{\r\n  lightTheme: undefined,\r\n}"
+            },
+            {
+                "name": "initialize",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "(options?: Parameters<SetupWorkerApi['start']>[0]): SetupWorkerApi => {\r\n  if (IS_BROWSER) {\r\n    const worker = setupWorker();\r\n    worker.start(options);\r\n    api = worker;\r\n  } else {\r\n    throw new Error('MswModule is not supported in node use the HttpMockModule instead');\r\n  }\r\n  return api;\r\n}"
+            },
+            {
+                "name": "IS_BROWSER",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "!isNodeProcess()"
+            },
+            {
+                "name": "isHttpMock",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "(handler: HttpMock | MswRequestHandler): handler is HttpMock => !!(handler as HttpMock)?.url"
+            },
+            {
+                "name": "MethodType",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  ...Default,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    userEvent.click(canvas.getByLabelText(/Endpoint three button/i));\r\n    const items = await canvas.findAllByRole('listitem');\r\n    expect(items.length).toBe(1);\r\n    expect(items[0].textContent).toBe('endpoint-three');\r\n  },\r\n}"
+            },
+            {
+                "name": "MOCKS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/domain/src/lib/mocks/mock.mock.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\r\n  {\r\n    url: 'endpoint-one',\r\n    response: {\r\n      data: 'endpoint-one',\r\n    },\r\n  },\r\n  rest.get('endpoint-two', (req, res, ctx) =>\r\n    res(\r\n      ctx.json({\r\n        data: 'endpoint-two',\r\n      })\r\n    )\r\n  ),\r\n  {\r\n    url: 'endpoint-three',\r\n    method: 'POST',\r\n    response: {\r\n      data: 'endpoint-three',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-four',\r\n    method: 'POST',\r\n    response: {\r\n      data: 'endpoint-four',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-four',\r\n    method: 'PUT',\r\n    response: {\r\n      data: 'endpoint-four',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-five',\r\n    status: 500,\r\n    response: {\r\n      data: 'endpoint-five',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-six',\r\n    once: true,\r\n    response: {\r\n      data: 'response 1',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-six',\r\n    response: {\r\n      data: 'response 2',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-seven',\r\n    delay: 500,\r\n    response: {\r\n      data: 'endpoint-seven',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-eight/:userId',\r\n    responseFn: (req) => ({\r\n      data: 'endpoint-eight-' + req.params.userId,\r\n    }),\r\n  },\r\n  {\r\n    url: 'endpoint-nine',\r\n    response: {\r\n      data: 'endpoint-nine',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-ten?start=0&limit=10',\r\n    response: {\r\n      data: 'endpoint-ten',\r\n    },\r\n  },\r\n]"
+            },
+            {
+                "name": "MswConfig",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  ...Default,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    userEvent.click(canvas.getByLabelText(/Endpoint two button/i));\r\n    const items = await canvas.findAllByRole('listitem');\r\n    expect(items.length).toBe(1);\r\n    expect(items[0].textContent).toBe('endpoint-two');\r\n  },\r\n}"
+            },
+            {
+                "name": "mswDecorator",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.decorator.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "DecoratorFunction",
+                "defaultValue": "(storyFn, context: DecoratorContext) => {\r\n  const {\r\n    parameters: { msw },\r\n  } = context;\r\n\r\n  resetHandlers();\r\n  if (msw) {\r\n    addHandlers(...msw);\r\n  }\r\n\r\n  return storyFn();\r\n}"
+            },
+            {
+                "name": "NoMethodTypeMeansAll",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  ...Default,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    userEvent.click(canvas.getByLabelText(/Endpoint nine button/i));\r\n    const items = await canvas.findAllByRole('listitem');\r\n    expect(items.length).toBe(1);\r\n    expect(items[0].textContent).toBe('endpoint-nine');\r\n  },\r\n}"
+            },
+            {
+                "name": "resetHandlers",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "() => {\r\n  const worker = getWorker();\r\n  worker.resetHandlers();\r\n}"
+            },
+            {
+                "name": "RespondingOnlyOnce",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  ...Default,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    userEvent.click(canvas.getByLabelText(/Endpoint six button/i));\r\n    await canvas.findByText('response 1');\r\n    await canvas.findByText('response 2');\r\n  },\r\n}"
+            },
+            {
+                "name": "ResponseFromFunction",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  ...Default,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    userEvent.click(canvas.getByLabelText(/Endpoint eight button/i));\r\n    const items = await canvas.findAllByRole('listitem');\r\n    expect(items.length).toBe(1);\r\n    expect(items[0].textContent).toBe('endpoint-eight-test');\r\n  },\r\n}"
+            },
+            {
+                "name": "SameUrlDifferentMethods",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  ...Default,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    userEvent.click(canvas.getByLabelText(/Endpoint four button/i));\r\n    const items = await canvas.findAllByRole('listitem');\r\n    expect(items.length).toBe(2);\r\n    expect(items[0].textContent).toBe('endpoint-four');\r\n    expect(items[1].textContent).toBe('endpoint-four');\r\n  },\r\n}"
+            },
+            {
+                "name": "SingleEndPoint",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  ...Default,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    userEvent.click(canvas.getByLabelText(/Endpoint one button/i));\r\n    const items = await canvas.findAllByRole('listitem');\r\n    expect(items.length).toBe(1);\r\n    expect(items[0].textContent).toBe('endpoint-one');\r\n  },\r\n}"
+            },
+            {
+                "name": "Status",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  ...Default,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    userEvent.click(canvas.getByLabelText(/Endpoint five button/i));\r\n    const items = await canvas.findAllByRole('listitem');\r\n    expect(items.length).toBe(1);\r\n    expect(items[0].textContent).toBe('caught error');\r\n  },\r\n}"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/components/header/shell/src/lib/shell.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ShellComponent>",
+                "defaultValue": "(args) => ({\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<TestComponent>",
+                "defaultValue": "(args) => ({\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "THEME_MOCKS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/components/header/domain/src/lib/mocks/theme.mock.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "HttpMock[]",
+                "defaultValue": "[\r\n  {\r\n    url: 'user/theme',\r\n    response: {\r\n      lightTheme: true,\r\n    },\r\n  },\r\n  {\r\n    url: 'user/theme',\r\n    method: 'POST',\r\n    response: {},\r\n  },\r\n]"
+            },
+            {
+                "name": "UrlIncludingParameters",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  ...Default,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    userEvent.click(canvas.getByLabelText(/Endpoint ten button/i));\r\n    const items = await canvas.findAllByRole('listitem');\r\n    expect(items.length).toBe(1);\r\n    expect(items[0].textContent).toBe('endpoint-ten');\r\n  },\r\n}"
+            }
+        ],
+        "functions": [],
+        "typealiases": [
+            {
+                "name": "DecoratorParameters",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "literal type",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.decorator.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 181
+            },
+            {
+                "name": "MethodType",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"GET\" | \"POST\" | \"PUT\" | \"DELETE\"",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/models/method-type.model.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 186
+            },
+            {
+                "name": "MswRequestHandler",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "RequestHandler<RequestHandlerDefaultInfo | MockedRequest<DefaultRequestBody> | any | MockedRequest<DefaultRequestBody>>",
+                "file": "libs/ng-shared/ng-msw/util/src/lib/models/msw-request-handler.type.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 177
+            }
+        ],
+        "enumerations": [],
+        "groupedVariables": {
+            "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts": [
+                {
+                    "name": "addHandlers",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(...handlers: (HttpMock | MswRequestHandler)[]): void => {\r\n  const worker = getWorker();\r\n  const processedHandlers: MswRequestHandler[] = [];\r\n  handlers.forEach((handler) => {\r\n    if (isHttpMock(handler)) {\r\n      processedHandlers.push(getRestHandlers(handler.url, handler));\r\n    } else {\r\n      processedHandlers.push(handler);\r\n    }\r\n  });\r\n  worker.use(...processedHandlers);\r\n}"
+                },
+                {
+                    "name": "addHttpMockSettings",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(httpMock: HttpMock): ResponseTransformer<unknown, unknown> =>\r\n  (res) => {\r\n    const { status, delay, once } = httpMock;\r\n    res.status = status ?? 200;\r\n    if (delay) {\r\n      res.delay = delay;\r\n    }\r\n    if (once) {\r\n      res.once = once;\r\n    }\r\n    return res;\r\n  }"
+                },
+                {
+                    "name": "api",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "SetupWorkerApi"
+                },
+                {
+                    "name": "getRestHandlers",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(mocksUrl: string, mock: HttpMock): MswRequestHandler => {\r\n  const url = getSlashPrefixedUrl(mocksUrl);\r\n  const responseResolver: ResponseResolver<RestRequest<never, PathParams>, RestContext, DefaultRequestBody> = (\r\n    req,\r\n    res,\r\n    ctx\r\n  ) => {\r\n    const response = mock.response ?? mock.responseFn(req);\r\n    return res(addHttpMockSettings(mock), ctx.json(response));\r\n  };\r\n  switch (mock.method) {\r\n    case 'GET':\r\n      return rest.get(url, responseResolver);\r\n    case 'POST':\r\n      return rest.post(url, responseResolver);\r\n    case 'PUT':\r\n      return rest.put(url, responseResolver);\r\n    case 'DELETE':\r\n      return rest.delete(url, responseResolver);\r\n    default:\r\n      return rest.all(url, responseResolver);\r\n  }\r\n}"
+                },
+                {
+                    "name": "getSlashPrefixedUrl",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(url: string) => (url.startsWith('/') ? url : `/${url}`)"
+                },
+                {
+                    "name": "getWorker",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(): SetupWorkerApi => api"
+                },
+                {
+                    "name": "initialize",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(options?: Parameters<SetupWorkerApi['start']>[0]): SetupWorkerApi => {\r\n  if (IS_BROWSER) {\r\n    const worker = setupWorker();\r\n    worker.start(options);\r\n    api = worker;\r\n  } else {\r\n    throw new Error('MswModule is not supported in node use the HttpMockModule instead');\r\n  }\r\n  return api;\r\n}"
+                },
+                {
+                    "name": "IS_BROWSER",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "!isNodeProcess()"
+                },
+                {
+                    "name": "isHttpMock",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(handler: HttpMock | MswRequestHandler): handler is HttpMock => !!(handler as HttpMock)?.url"
+                },
+                {
+                    "name": "resetHandlers",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "() => {\r\n  const worker = getWorker();\r\n  worker.resetHandlers();\r\n}"
+                }
+            ],
+            "libs/ng-shared/components/header/shell/src/lib/shell.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/components/header/shell/src/lib/shell.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/components/header/shell/src/lib/shell.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<ShellComponent>",
+                    "defaultValue": "(args) => ({\r\n  props: args,\r\n})"
+                }
+            ],
+            "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Delay",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n  ...Default,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    userEvent.click(canvas.getByLabelText(/Endpoint seven button/i));\r\n    expect(await canvas.queryByText('endpoint-seven')).toBeNull();\r\n    await canvas.findByText('endpoint-seven', undefined, { timeout: 1000 });\r\n  },\r\n}"
+                },
+                {
+                    "name": "MethodType",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n  ...Default,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    userEvent.click(canvas.getByLabelText(/Endpoint three button/i));\r\n    const items = await canvas.findAllByRole('listitem');\r\n    expect(items.length).toBe(1);\r\n    expect(items[0].textContent).toBe('endpoint-three');\r\n  },\r\n}"
+                },
+                {
+                    "name": "MswConfig",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n  ...Default,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    userEvent.click(canvas.getByLabelText(/Endpoint two button/i));\r\n    const items = await canvas.findAllByRole('listitem');\r\n    expect(items.length).toBe(1);\r\n    expect(items[0].textContent).toBe('endpoint-two');\r\n  },\r\n}"
+                },
+                {
+                    "name": "NoMethodTypeMeansAll",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n  ...Default,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    userEvent.click(canvas.getByLabelText(/Endpoint nine button/i));\r\n    const items = await canvas.findAllByRole('listitem');\r\n    expect(items.length).toBe(1);\r\n    expect(items[0].textContent).toBe('endpoint-nine');\r\n  },\r\n}"
+                },
+                {
+                    "name": "RespondingOnlyOnce",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n  ...Default,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    userEvent.click(canvas.getByLabelText(/Endpoint six button/i));\r\n    await canvas.findByText('response 1');\r\n    await canvas.findByText('response 2');\r\n  },\r\n}"
+                },
+                {
+                    "name": "ResponseFromFunction",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n  ...Default,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    userEvent.click(canvas.getByLabelText(/Endpoint eight button/i));\r\n    const items = await canvas.findAllByRole('listitem');\r\n    expect(items.length).toBe(1);\r\n    expect(items[0].textContent).toBe('endpoint-eight-test');\r\n  },\r\n}"
+                },
+                {
+                    "name": "SameUrlDifferentMethods",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n  ...Default,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    userEvent.click(canvas.getByLabelText(/Endpoint four button/i));\r\n    const items = await canvas.findAllByRole('listitem');\r\n    expect(items.length).toBe(2);\r\n    expect(items[0].textContent).toBe('endpoint-four');\r\n    expect(items[1].textContent).toBe('endpoint-four');\r\n  },\r\n}"
+                },
+                {
+                    "name": "SingleEndPoint",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n  ...Default,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    userEvent.click(canvas.getByLabelText(/Endpoint one button/i));\r\n    const items = await canvas.findAllByRole('listitem');\r\n    expect(items.length).toBe(1);\r\n    expect(items[0].textContent).toBe('endpoint-one');\r\n  },\r\n}"
+                },
+                {
+                    "name": "Status",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n  ...Default,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    userEvent.click(canvas.getByLabelText(/Endpoint five button/i));\r\n    const items = await canvas.findAllByRole('listitem');\r\n    expect(items.length).toBe(1);\r\n    expect(items[0].textContent).toBe('caught error');\r\n  },\r\n}"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<TestComponent>",
+                    "defaultValue": "(args) => ({\r\n  props: args,\r\n})"
+                },
+                {
+                    "name": "UrlIncludingParameters",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n  ...Default,\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    userEvent.click(canvas.getByLabelText(/Endpoint ten button/i));\r\n    const items = await canvas.findAllByRole('listitem');\r\n    expect(items.length).toBe(1);\r\n    expect(items[0].textContent).toBe('endpoint-ten');\r\n  },\r\n}"
+                }
+            ],
+            "libs/ng-shared/ng-msw/util/src/lib/http-mock/http-mock.module.ts": [
+                {
+                    "name": "HTTP_MOCK_CONFIG",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/http-mock/http-mock.module.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "new InjectionToken<HttpMock[]>('HTTP_MOCK_CONFIG')"
+                }
+            ],
+            "libs/ng-shared/components/header/domain/src/lib/initial-state.const.ts": [
+                {
+                    "name": "INITIAL_STATE",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/components/header/domain/src/lib/initial-state.const.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "HeaderState",
+                    "defaultValue": "{\r\n  lightTheme: undefined,\r\n}"
+                }
+            ],
+            "libs/ng-shared/ng-msw/domain/src/lib/mocks/mock.mock.ts": [
+                {
+                    "name": "MOCKS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/domain/src/lib/mocks/mock.mock.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\r\n  {\r\n    url: 'endpoint-one',\r\n    response: {\r\n      data: 'endpoint-one',\r\n    },\r\n  },\r\n  rest.get('endpoint-two', (req, res, ctx) =>\r\n    res(\r\n      ctx.json({\r\n        data: 'endpoint-two',\r\n      })\r\n    )\r\n  ),\r\n  {\r\n    url: 'endpoint-three',\r\n    method: 'POST',\r\n    response: {\r\n      data: 'endpoint-three',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-four',\r\n    method: 'POST',\r\n    response: {\r\n      data: 'endpoint-four',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-four',\r\n    method: 'PUT',\r\n    response: {\r\n      data: 'endpoint-four',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-five',\r\n    status: 500,\r\n    response: {\r\n      data: 'endpoint-five',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-six',\r\n    once: true,\r\n    response: {\r\n      data: 'response 1',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-six',\r\n    response: {\r\n      data: 'response 2',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-seven',\r\n    delay: 500,\r\n    response: {\r\n      data: 'endpoint-seven',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-eight/:userId',\r\n    responseFn: (req) => ({\r\n      data: 'endpoint-eight-' + req.params.userId,\r\n    }),\r\n  },\r\n  {\r\n    url: 'endpoint-nine',\r\n    response: {\r\n      data: 'endpoint-nine',\r\n    },\r\n  },\r\n  {\r\n    url: 'endpoint-ten?start=0&limit=10',\r\n    response: {\r\n      data: 'endpoint-ten',\r\n    },\r\n  },\r\n]"
+                }
+            ],
+            "libs/ng-shared/ng-msw/util/src/lib/msw/msw.decorator.ts": [
+                {
+                    "name": "mswDecorator",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.decorator.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "DecoratorFunction",
+                    "defaultValue": "(storyFn, context: DecoratorContext) => {\r\n  const {\r\n    parameters: { msw },\r\n  } = context;\r\n\r\n  resetHandlers();\r\n  if (msw) {\r\n    addHandlers(...msw);\r\n  }\r\n\r\n  return storyFn();\r\n}"
+                }
+            ],
+            "libs/ng-shared/components/header/domain/src/lib/mocks/theme.mock.ts": [
+                {
+                    "name": "THEME_MOCKS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ng-shared/components/header/domain/src/lib/mocks/theme.mock.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "HttpMock[]",
+                    "defaultValue": "[\r\n  {\r\n    url: 'user/theme',\r\n    response: {\r\n      lightTheme: true,\r\n    },\r\n  },\r\n  {\r\n    url: 'user/theme',\r\n    method: 'POST',\r\n    response: {},\r\n  },\r\n]"
+                }
+            ]
+        },
+        "groupedFunctions": {},
+        "groupedEnumerations": {},
+        "groupedTypeAliases": {
+            "libs/ng-shared/ng-msw/util/src/lib/msw/msw.decorator.ts": [
+                {
+                    "name": "DecoratorParameters",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "literal type",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.decorator.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 181
+                }
+            ],
+            "libs/ng-shared/ng-msw/util/src/lib/models/method-type.model.ts": [
+                {
+                    "name": "MethodType",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"GET\" | \"POST\" | \"PUT\" | \"DELETE\"",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/models/method-type.model.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 186
+                }
+            ],
+            "libs/ng-shared/ng-msw/util/src/lib/models/msw-request-handler.type.ts": [
+                {
+                    "name": "MswRequestHandler",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "RequestHandler<RequestHandlerDefaultInfo | MockedRequest<DefaultRequestBody> | any | MockedRequest<DefaultRequestBody>>",
+                    "file": "libs/ng-shared/ng-msw/util/src/lib/models/msw-request-handler.type.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 177
+                }
+            ]
+        }
+    },
+    "routes": [],
+    "coverage": {
+        "count": 0,
+        "status": "low",
+        "files": [
+            {
+                "filePath": "libs/ng-shared/components/header/application/src/lib/header-store.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "HeaderStoreService",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/components/header/data-access/src/lib/theme.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "ThemeService",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/components/header/domain/src/lib/header-state.model.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "HeaderState",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/components/header/domain/src/lib/initial-state.const.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "INITIAL_STATE",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/components/header/domain/src/lib/mocks/theme.mock.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "THEME_MOCKS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/components/header/domain/src/lib/theme-response.model.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "ThemeResponse",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/components/header/shell/src/lib/shell.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ShellComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/components/header/shell/src/lib/shell.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/components/header/shell/src/lib/shell.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/domain/src/lib/mocks/mock.mock.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "MockResponse",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/domain/src/lib/mocks/mock.mock.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "MOCKS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/http-mock/http-mock-request.interceptor.ts",
+                "type": "interceptor",
+                "linktype": "interceptor",
+                "name": "HttpMockRequestInterceptor",
+                "coveragePercent": 0,
+                "coverageCount": "0/11",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/http-mock/http-mock.module.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "HTTP_MOCK_CONFIG",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/models/http-mock.model.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "HttpMock",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.decorator.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DecoratorContext",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.decorator.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "mswDecorator",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "addHandlers",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "addHttpMockSettings",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "api",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "getRestHandlers",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "getSlashPrefixedUrl",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "getWorker",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "initialize",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "IS_BROWSER",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "isHttpMock",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/msw.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "resetHandlers",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TestComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/13",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Delay",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "MethodType",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "MswConfig",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "NoMethodTypeMeansAll",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "RespondingOnlyOnce",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ResponseFromFunction",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "SameUrlDifferentMethods",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "SingleEndPoint",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Status",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ng-shared/ng-msw/util/src/lib/msw/stories/test.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "UrlIncludingParameters",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            }
+        ]
+    }
+}

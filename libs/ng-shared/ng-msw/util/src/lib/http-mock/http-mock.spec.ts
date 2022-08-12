@@ -105,4 +105,15 @@ describe('msw mocks', () => {
     const observerSpy = subscribeSpyTo(httpClient.post(url, body));
     expect(observerSpy.getLastValue()).toEqual(body);
   });
+  it('should apply to all method types when a method type is not provided', () => {
+    setupMocks([{ url, response: { ...body } }]);
+    const observerSpy = subscribeSpyTo(httpClient.post(url, {}));
+    expect(observerSpy.getLastValue()).toEqual(body);
+  });
+  it('should match url that includes query parameters', () => {
+    const queryParamUrl = 'endpoint?start=0&limit=10';
+    setupMocks([{ url: queryParamUrl, response: { ...body } }]);
+    const observerSpy = subscribeSpyTo(httpClient.post(queryParamUrl, {}));
+    expect(observerSpy.getLastValue()).toEqual(body);
+  });
 });

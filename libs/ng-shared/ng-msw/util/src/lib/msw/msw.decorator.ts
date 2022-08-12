@@ -17,7 +17,9 @@ export const mswDecorator: DecoratorFunction = (storyFn, context: DecoratorConte
   } = context;
 
   resetHandlers();
-  addHandlers(...msw);
+  if (msw) {
+    addHandlers(...msw);
+  }
 
   return storyFn();
 };

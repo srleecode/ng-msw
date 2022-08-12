@@ -112,3 +112,25 @@ export const ResponseFromFunction = {
     expect(items[0].textContent).toBe('endpoint-eight-test');
   },
 };
+
+export const NoMethodTypeMeansAll = {
+  ...Default,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    userEvent.click(canvas.getByLabelText(/Endpoint nine button/i));
+    const items = await canvas.findAllByRole('listitem');
+    expect(items.length).toBe(1);
+    expect(items[0].textContent).toBe('endpoint-nine');
+  },
+};
+
+export const UrlIncludingParameters = {
+  ...Default,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    userEvent.click(canvas.getByLabelText(/Endpoint ten button/i));
+    const items = await canvas.findAllByRole('listitem');
+    expect(items.length).toBe(1);
+    expect(items[0].textContent).toBe('endpoint-ten');
+  },
+};

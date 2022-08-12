@@ -1,14 +1,15 @@
 {
   "projectType": "library",
-  "root": "libs/ng-shared/components/header/data-access",
   "sourceRoot": "libs/ng-shared/components/header/data-access/src",
   "prefix": "ng-shared",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/ng-shared/components/header/data-access"],
+      "outputs": [
+        "coverage/libs/ng-shared/components/header/data-access"
+      ],
       "options": {
-        "jestConfig": "libs/ng-shared/components/header/data-access/jest.config.js",
+        "jestConfig": "libs/ng-shared/components/header/data-access/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -22,5 +23,9 @@
       }
     }
   },
-  "tags": ["app:ng-shared", "scope:ng-shared-components-header", "type:data-access"]
+  "tags": [
+    "app:ng-shared",
+    "scope:ng-shared-components-header",
+    "type:data-access"
+  ]
 }

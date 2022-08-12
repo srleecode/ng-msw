@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, NgModule } from '@angular/core';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { MockResponse } from '@srleecode/ng-shared/ng-msw/domain/testing';
@@ -62,6 +62,22 @@ export class TestComponent {
 
   endPointEight(): void {
     this.httpClient.get<MockResponse>('endpoint-eight/test').subscribe((rsp) => this.list.push(rsp.data));
+  }
+
+  endPointNine() {
+    return this.httpClient.post<MockResponse>('endpoint-nine', {}).subscribe((rsp) => this.list.push(rsp.data));
+  }
+
+  endPointTen() {
+    const params = new HttpParams({
+      fromObject: {
+        start: 0,
+        limit: 10,
+      },
+    });
+    return this.httpClient
+      .post<MockResponse>('endpoint-ten?start=0&limit=10', {}, { params })
+      .subscribe((rsp) => this.list.push(rsp.data));
   }
 }
 

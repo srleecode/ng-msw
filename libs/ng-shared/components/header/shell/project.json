@@ -1,14 +1,15 @@
 {
   "projectType": "library",
-  "root": "libs/ng-shared/components/header/shell",
   "sourceRoot": "libs/ng-shared/components/header/shell/src",
   "prefix": "ng-shared",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/ng-shared/components/header/shell"],
+      "outputs": [
+        "coverage/libs/ng-shared/components/header/shell"
+      ],
       "options": {
-        "jestConfig": "libs/ng-shared/components/header/shell/jest.config.js",
+        "jestConfig": "libs/ng-shared/components/header/shell/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -22,5 +23,9 @@
       }
     }
   },
-  "tags": ["app:ng-shared", "scope:ng-shared-components-header", "type:shell"]
+  "tags": [
+    "app:ng-shared",
+    "scope:ng-shared-components-header",
+    "type:shell"
+  ]
 }

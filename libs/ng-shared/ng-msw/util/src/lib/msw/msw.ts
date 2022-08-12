@@ -74,8 +74,7 @@ const getRestHandlers = (mocksUrl: string, mock: HttpMock): MswRequestHandler =>
     const response = mock.response ?? mock.responseFn(req);
     return res(addHttpMockSettings(mock), ctx.json(response));
   };
-  const method = mock.method ?? 'GET';
-  switch (method) {
+  switch (mock.method) {
     case 'GET':
       return rest.get(url, responseResolver);
     case 'POST':
@@ -84,5 +83,7 @@ const getRestHandlers = (mocksUrl: string, mock: HttpMock): MswRequestHandler =>
       return rest.put(url, responseResolver);
     case 'DELETE':
       return rest.delete(url, responseResolver);
+    default:
+      return rest.all(url, responseResolver);
   }
 };

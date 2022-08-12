@@ -1,12 +1,13 @@
 {
   "projectType": "library",
-  "root": "libs/ng-shared/ng-msw/util",
   "sourceRoot": "libs/ng-shared/ng-msw/util/src",
   "prefix": "ng-shared",
   "targets": {
     "build": {
       "executor": "@nrwl/angular:package",
-      "outputs": ["dist/libs/ng-shared/ng-msw/util"],
+      "outputs": [
+        "dist/libs/ng-shared/ng-msw/util"
+      ],
       "options": {
         "project": "libs/ng-shared/ng-msw/util/ng-package.json"
       },
@@ -22,18 +23,27 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/ng-shared/ng-msw/util"],
+      "outputs": [
+        "coverage/libs/ng-shared/ng-msw/util"
+      ],
       "options": {
-        "jestConfig": "libs/ng-shared/ng-msw/util/jest.config.js",
+        "jestConfig": "libs/ng-shared/ng-msw/util/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/ng-shared/ng-msw/util/src/**/*.ts", "libs/ng-shared/ng-msw/util/src/**/*.html"]
+        "lintFilePatterns": [
+          "libs/ng-shared/ng-msw/util/src/**/*.ts",
+          "libs/ng-shared/ng-msw/util/src/**/*.html"
+        ]
       }
     }
   },
-  "tags": ["app:ng-shared", "scope:ng-shared-ng-msw", "type:util"]
+  "tags": [
+    "app:ng-shared",
+    "scope:ng-shared-ng-msw",
+    "type:util"
+  ]
 }

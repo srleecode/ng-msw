@@ -73,4 +73,16 @@ export const MOCKS: (HttpMock | MswRequestHandler)[] = [
       data: 'endpoint-eight-' + req.params.userId,
     }),
   },
+  {
+    url: 'endpoint-nine',
+    response: {
+      data: 'endpoint-nine',
+    },
+  },
+  {
+    url: 'endpoint-ten?start=0&limit=10',
+    response: {
+      data: 'endpoint-ten',
+    },
+  },
 ];

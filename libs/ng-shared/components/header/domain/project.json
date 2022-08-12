@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/ng-shared/components/header/domain",
   "sourceRoot": "libs/ng-shared/components/header/domain/src",
   "prefix": "ng-shared",
   "targets": {

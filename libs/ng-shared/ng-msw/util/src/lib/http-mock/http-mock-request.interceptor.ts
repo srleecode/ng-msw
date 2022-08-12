@@ -1,4 +1,4 @@
-import { Inject, Injectable, Optional } from '@angular/core';
+import { forwardRef, Inject, Injectable, Optional } from '@angular/core';
 import {
   HttpInterceptor,
   HttpRequest,
@@ -7,8 +7,8 @@ import {
   HttpResponse,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { interval, map, Observable, of } from 'rxjs';
-import { delayWhen } from 'rxjs/operators';
+import { interval, Observable, of } from 'rxjs';
+import { delayWhen, map } from 'rxjs/operators';
 import { HTTP_MOCK_CONFIG } from './http-mock.module';
 import { DefaultRequestBody, PathParams, RestRequest } from 'msw';
 import { Headers } from 'headers-polyfill';
@@ -19,11 +19,16 @@ import { MswRequestHandler } from '../models/msw-request-handler.type';
 @Injectable()
 export class HttpMockRequestInterceptor implements HttpInterceptor {
   private doneMocks = new Set<number>();
-  constructor(@Optional() @Inject(HTTP_MOCK_CONFIG) private config: HttpMock[]) {}
+  constructor(@Optional() @Inject(forwardRef(() => HTTP_MOCK_CONFIG)) private config: HttpMock[]) {}
+
+  // escapes all special characters, e.g. a url might have ? for query parameters
+  escapeRegExp = (string: string): string => {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  };
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     for (const [i, httpMock] of (this.config || []).filter((mock) => this.isHttpMock(mock)).entries()) {
-      const regExp = new RegExp(httpMock.url, 'i');
+      const regExp = new RegExp(this.escapeRegExp(httpMock.url), 'i');
       if (this.isMatchingMethodType(request, httpMock) && regExp.exec(request.url) && !this.doneMocks.has(i)) {
         return this.getMockedResponse(request, httpMock, i);
       }

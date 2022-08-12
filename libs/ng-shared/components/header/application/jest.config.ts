@@ -1,5 +1,7 @@
-module.exports = {
-  displayName: 'ng-shared-components-header-data-access',
+/* eslint-disable */
+/* eslint-disable */
+export default {
+  displayName: 'ng-shared-components-header-application',
   preset: '../../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +10,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../../../coverage/libs/ng-shared/components/header/data-access',
+  coverageDirectory: '../../../../../coverage/libs/ng-shared/components/header/application',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
