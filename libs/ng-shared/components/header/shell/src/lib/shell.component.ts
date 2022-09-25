@@ -15,21 +15,28 @@ import { HeaderStoreService } from '@srleecode/ng-shared/components/header/appli
 })
 export class ShellComponent {
   isLightTheme = true;
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
     private storeService: HeaderStoreService
   ) {
+    this.storeService.lightTheme$.subscribe((isLightTheme) => {
+      this.isLightTheme = isLightTheme;
+      this.setThemeClass();
+    });
     this.storeService.loadTheme();
   }
 
-  toggleTheme(): void {
-    this.isLightTheme = !this.isLightTheme;
+  private setThemeClass(): void {
     if (!this.isLightTheme) {
       this.renderer.addClass(this.document.body, 'dark-theme');
     } else {
       this.renderer.removeClass(this.document.body, 'dark-theme');
     }
+  }
+  toggleTheme(): void {
+    this.storeService.toggleTheme();
   }
 }
 

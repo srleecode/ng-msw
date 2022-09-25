@@ -1,6 +1,7 @@
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
 import { ShellComponent, NgSharedComponentsHeaderShellModule } from './shell.component';
 import { GLOBAL_MOUNT_OPTIONS } from '@cypress/component-testing';
+import { THEME_MOCKS } from '@srleecode/ng-shared/components/header/domain/testing';
 
 export default {
   component: ShellComponent,
@@ -10,6 +11,9 @@ export default {
       imports: [NgSharedComponentsHeaderShellModule, ...GLOBAL_MOUNT_OPTIONS.imports],
     }),
   ],
+  parameters: {
+    msw: THEME_MOCKS,
+  },
 } as Meta;
 
 const Template: Story<ShellComponent> = (args) => ({
